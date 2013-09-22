@@ -16,12 +16,13 @@ namespace IdnoPlugins\Pushover {
         function registerEventHooks() {
             parent::registerEventHooks();
             
-            \Idno\Core\site()->addEventHook('annotation/add/reply', 'self::annotate');
+            \Idno\Core\site()->addEventHook('annotation/add/reply', '\IdnoPlugins\Pushover\Main::annotate');
         }
         
         static function annotate(\Idno\Core\Event $event) {
             $object = $event->data()['object'];
-            $annotation = $this->data()['annotation'];
+            $annotation = $event->data()['annotation'];
+            
             if ($user = $object->getOwner() )
             {
                 $session = \Idno\Core\site()->session(); 
@@ -40,7 +41,7 @@ namespace IdnoPlugins\Pushover {
                         switch ($event->getName()) {
 
                             case 'annotation/add/reply' :
-                                    self::send($token, $user_token, "You have a new comment", ['title' => $title, 'url' => $url]);
+                                    self::send($token, $user_token, $annotation[owner_name] . " has left you a comment!", ['title' => $title, 'url' => $url]);
                                 break;
                         }
                         

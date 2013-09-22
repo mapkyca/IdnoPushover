@@ -1,3 +1,9 @@
+<?php
+
+$session = \Idno\Core\site()->session(); 
+$user = $session->currentUser();
+                            
+?>
 <div class="row">
 
     <div class="span10 offset1">
@@ -14,7 +20,6 @@
                 <div class="controls">
                     <p><a href="https://pushover.net/apps/build" target="_blank">Set up an application for your idno site</a> at pushover.net, and then enter the details below:
                     </p>
-                    
                     
                     <div class="control-group">
                         <label class="control-label" for="user_token">User Token</label>
