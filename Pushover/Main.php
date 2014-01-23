@@ -28,7 +28,7 @@ namespace IdnoPlugins\Pushover {
                 $session = \Idno\Core\site()->session(); 
                 $logged_in_user = $session->currentUser(); 
                 
-                if ($user->getUUID() != $logged_in_user->getUUID()) {
+                if ((empty($logged_in_user)) || ($user->getUUID() != $logged_in_user->getUUID())) {
                     
                     $user_token = $user->pushover_user_token;
                     $token = $user->pushover_app_token;
